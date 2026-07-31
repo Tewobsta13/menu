@@ -287,10 +287,6 @@ footer p {
   transform: translateY(-5px);
 }
 
-/* =====================
- MOBILE
-===================== */
-
 @media (max-width: 700px) {
   .header h1 {
     font-size: 35px;
