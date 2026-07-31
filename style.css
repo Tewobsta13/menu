@@ -3,7 +3,7 @@
 ===================== */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --gold: #d4a017;
   --dark: #121212;
@@ -57,14 +57,15 @@ img {
 }
 
 .header h1 {
-  font-size: 45px;
+  font-family: "Merienda",sans-serif;
+  font-size: 4rem;
   margin-bottom: 15px;
 }
 
 .header p {
   font-size: 20px;
   opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
 }
 
 .menu-btn {
