@@ -1,0 +1,306 @@
+/* =====================
+   GLOBAL
+===================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --gold: #d4a017;
+  --dark: #121212;
+  --cream: #fff8ed;
+  --green: #1f6b45;
+  --white: #ffffff;
+  --shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+
+  background: var(--cream);
+
+  color: #333;
+}
+
+img {
+  width: 100%;
+
+  display: block;
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.header {
+  text-align: center;
+
+  padding: 70px 20px;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("images/restaurant.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  color: white;
+}
+
+.logo {
+  font-size: 45px;
+
+  color: var(--gold);
+
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 45px;
+
+  margin-bottom: 15px;
+}
+
+.header p {
+  font-size: 20px;
+
+  opacity: 0.9;
+
+  margin-bottom: 30px;
+}
+
+.menu-btn {
+  display: inline-block;
+
+  background: var(--gold);
+
+  color: white;
+
+  padding: 14px 35px;
+
+  border-radius: 40px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 25px rgba(212, 160, 23, 0.4);
+}
+
+/* =====================
+   MENU
+===================== */
+
+.menu-section {
+  padding: 70px 8%;
+}
+
+.menu-section h2 {
+  text-align: center;
+
+  font-size: 38px;
+
+  margin-bottom: 45px;
+
+  color: var(--dark);
+}
+
+.food-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+  gap: 30px;
+}
+
+/* =====================
+   FOOD CARD
+===================== */
+
+.food-card {
+  background: white;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.4s;
+}
+
+.food-card:hover {
+  transform: translateY(-12px);
+}
+
+.food-card img {
+  height: 230px;
+
+  object-fit: cover;
+
+  transition: 0.5s;
+}
+
+.food-card:hover img {
+  transform: scale(1.08);
+}
+
+.food-info {
+  padding: 25px;
+}
+
+.food-info span {
+  background: #f6e5a8;
+
+  color: #886000;
+
+  padding: 6px 15px;
+
+  border-radius: 30px;
+
+  font-size: 13px;
+}
+
+.food-info h3 {
+  font-size: 25px;
+
+  margin: 15px 0 5px;
+}
+
+/* STARS */
+
+.stars {
+  color: #fbbf24;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 15px;
+}
+
+.food-info p {
+  color: #777;
+
+  line-height: 1.7;
+
+  margin-bottom: 20px;
+}
+
+/* PRICE AREA */
+
+.price {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: var(--green);
+}
+
+.price button {
+  border: none;
+
+  background: var(--dark);
+
+  color: white;
+
+  padding: 12px 22px;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.price button:hover {
+  background: var(--gold);
+
+  transform: scale(1.05);
+}
+
+/* =====================
+ FOOTER
+===================== */
+
+footer {
+  background: #111;
+
+  color: white;
+
+  text-align: center;
+
+  padding: 50px 20px;
+}
+
+footer h2 {
+  color: var(--gold);
+
+  font-size: 30px;
+
+  margin-bottom: 15px;
+}
+
+footer p {
+  margin: 10px;
+
+  color: #ddd;
+}
+
+.social {
+  margin: 25px;
+}
+
+.social i {
+  font-size: 25px;
+
+  margin: 0 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.social i:hover {
+  color: var(--gold);
+
+  transform: translateY(-5px);
+}
+
+/* =====================
+ MOBILE
+===================== */
+
+@media (max-width: 700px) {
+  .header h1 {
+    font-size: 35px;
+  }
+
+  .menu-section h2 {
+    font-size: 30px;
+  }
+
+  .food-card img {
+    height: 200px;
+  }
+}
