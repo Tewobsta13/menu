@@ -3,7 +3,7 @@
 ===================== */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
 :root {
   --gold: #d4a017;
   --dark: #121212;
@@ -76,6 +76,7 @@ img {
   border-radius: 40px;
   font-weight: 600;
   transition: 0.3s;
+  text-decoration: none;
 }
 
 .menu-btn:hover {
@@ -114,6 +115,7 @@ img {
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: 0.4s;
+  position: relative;
 }
 
 .food-card:hover {
@@ -141,6 +143,10 @@ img {
   border-radius: 30px;
   font-size: 11px;
   border: 1px solid #886000;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
 }
 
 .food-info h3 {
