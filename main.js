@@ -1,10 +1,10 @@
 
 
-const cartBtnContainer = document.getElementById("cart-btn-container");
+const cartBtn = document.getElementById("cart-btn");
 const cartDialog = document.getElementById("cart-dialog");
 const closeCartBtn = document.getElementById("close-cart");
 
-cartBtnContainer.addEventListener("click", () => {
+cartBtn.addEventListener("click", () => {
   cartDialog.classList.add("open");
 });
 
