@@ -13,7 +13,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
 
   </head>
 
@@ -34,221 +33,8 @@
     <!-- ================= MENU ================= -->
 
     <main id="menu">
-      <!-- ETHIOPIAN -->
+      <div id="menu-container"></div>
 
-      <section class="menu-section">
-        <h2>Ethiopian Favorites</h2>
-
-        <div class="food-grid">
-          <div class="food-card">
-            <img src="images/dorowat.jpg" />
-            
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Doro Wat</h3>
-                <p class="price">
-                  420 ETB
-                </p>
-                <span>Traditional</span>
-              </div>
-              
-              
-              <span class="stars">★5</span>
-              
-              <p>Spicy Ethiopian chicken stew served with fresh injera.</p>
-              
-              <div class="add-section">
-                       <div id="item-quantity">
-                <button id="inc-item">-</button>
-                <div id="quantity">0</div>
-                <button class="dec-item">+</button>
-              </div>
-                
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-        </div>
-          
-          <div class="food-card">
-            <img src="images/tibs.jpg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Tibs</h3>
-                <span>Popular</span>               
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Fried beef cubes with vegetables and Ethiopian spices.</p>
-              <div class="price">
-                450 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <img src="images/kitfo.jpg" />
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Kitfo</h3>
-                <span>Chef Special</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Minced beef mixed with Ethiopian butter and spices.</p>
-              <div class="price">
-                480 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <img src="images/misrwat.jpg" />
-            <div class="food-info">
-              <div class="card-header">              
-                <h3>Misir Wat</h3>
-                <span>Vegetarian</span>
-              </div>
-              <div class="stars">★★★★☆</div>
-              <p>Slow cooked red lentils with traditional berbere sauce.</p>
-              <div class="price">
-                280 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOREIGN FOOD -->
-
-      <section class="menu-section">
-        <h2>International Cuisine</h2>
-
-        <div class="food-grid">
-          <div class="food-card">
-            <img src="images/peoperonipizza.jpg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Pepperoni Pizza</h3>
-                <span>Italian</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Crispy pizza with cheese and premium pepperoni.</p>
-              <div class="price">
-                650 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <img src="images/beefburger.jpg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Beef Burger</h3>
-                <span>Fast Food</span>
-              </div>
-              <div class="stars">★★★★☆</div>
-              <p>Juicy beef burger served with fries and cheese.</p>
-              <div class="price">
-                520 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <img src="images/chickenalferdo.jpg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Chicken Alfredo</h3>
-                <span>Pasta</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Creamy pasta with grilled chicken.</p>
-              <div class="price">
-                600 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- DRINKS -->
-
-      <section class="menu-section">
-        <h2>Drinks</h2>
-         <div class="food-grid">
-          <div class="food-card">
-            <img src="images/coffee.jpeg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3> Coffee</h3>
-                <span>Traditional</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Fresh traditional Ethiopian coffee.</p>
-              <div class="price">
-                90 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-          <div class="food-card">
-            <img src="images/tea.jpeg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Tea</h3>
-                <span>Traditional</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Fresh traditional Ethiopian coffee.</p>
-              <div class="price">
-                50 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-          <div class="food-card">
-            <img src="images/fruitmoktail.jpg" />
-
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Soft Drinks</h3>
-                <span>Fresh</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Fresh Drink.</p>
-              <div class="price">
-                90 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <img src="images/freshjuice.jpg" />
-            <div class="food-info">
-              <div class="card-header">
-                <h3>Fresh Juice</h3>
-                <span>Fresh</span>
-              </div>
-              <div class="stars">★★★★★</div>
-              <p>Fresh mango, avocado and mixed juices.</p>
-              <div class="price">
-                160 ETB
-                <button onclick="alert('Order Added')">Add Order</button>
-              </div>
-            </div>
-          </div>
-      </section>
       <section id="cart-dialog">
 
         <div id="cart">
@@ -303,6 +89,8 @@
       </div>
       <p>© 2026 Brooklyn's Cafe. All Rights Reserved.</p>
     </footer>
+    <script src="object.js"></script>
+    <script src="script.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

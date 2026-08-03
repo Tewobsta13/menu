@@ -313,20 +313,23 @@ position: fixed;
   border-radius: 1rem;
   box-shadow: 2px 4px 4px rgb(182, 182, 182);
 }
-#item-quantity{
+#item-quantity,
+.item-quantity {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-#item-quantity button{
- border: none;
- background: #fff;
- border:1px solid var(--gold);
- border-radius: 10px;
- padding: 0.5rem;
- font-size: 1rem;
- font-weight: bold;
- color: #111;
+#item-quantity button,
+.item-quantity button {
+  border: none;
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111;
+  cursor: pointer;
 }
 #cart-header{
  margin-bottom: 2rem;
