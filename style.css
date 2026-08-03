@@ -4,6 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 :root {
   --gold: #d4a017;
   --dark: #121212;
@@ -49,6 +50,10 @@ img {
   background-position: center;
   background-repeat: no-repeat;
   color: white;
+}
+
+#date-time {
+  font-family: Inconsolata;
 }
 
 .logo {
