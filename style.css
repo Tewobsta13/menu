@@ -27,6 +27,7 @@ body {
   font-family: "Poppins", sans-serif;
   background: var(--cream);
   color: #333;
+  position: relative;
 }
 
 img {
@@ -145,7 +146,6 @@ img {
   border: 1px solid #886000;
   position: absolute;
   top: 0.5rem;
-  left: 0.5rem;
   z-index: 100;
 }
 
@@ -164,7 +164,7 @@ img {
 .stars {
   color: #fbbf24;
   letter-spacing: 3px;
-  margin-bottom: 1rem;
+  right:2rem;
 }
 
 .food-info p {
@@ -174,17 +174,21 @@ img {
 }
 
 /* PRICE AREA */
+.price{
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 700;
+}
 
-.price {
+.add-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 22px;
   font-weight: 700;
-  color: var(--green);
 }
 
-.price button {
+.add-section button {
   border: none;
   background: var(--dark);
   color: white;
@@ -194,9 +198,10 @@ img {
   transition: 0.3s;
 }
 
-.price button:hover {
+.add-section button:hover {
   background: var(--gold);
   transform: scale(1.05);
+
 }
 
 /* =====================
@@ -250,4 +255,131 @@ footer p {
   .food-card img {
     height: 200px;
   }
+}
+#cart-btn-container{
+  padding: 1rem;
+  background: #f6e5a8;
+  padding: 1rem;
+  border-radius:100%;
+  font-size: 11px;
+  border: 1px solid #886000;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+position: fixed;
+}
+#cart-btn{
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  color: #886000;
+
+}
+
+#cart-dialog{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(17, 17, 17, 0.5);
+  position: fixed;
+  z-index: 100000;
+  top: 0;
+  left: 0;
+}
+
+#cart-dialog.open {
+  display: flex;
+}
+
+#cart{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 2px 8px 12px;
+  position: relative;
+  width: 550px;
+  max-width: 90vw;
+}
+
+#cart-item{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgb(196, 196, 196);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 2px 4px 4px rgb(182, 182, 182);
+}
+#item-quantity{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#item-quantity button{
+ border: none;
+ background: #fff;
+ border:1px solid var(--gold);
+ border-radius: 10px;
+ padding: 0.5rem;
+ font-size: 1rem;
+ font-weight: bold;
+ color: #111;
+}
+#cart-header{
+ margin-bottom: 2rem;
+ border-bottom: 1px solid gray;
+ padding-bottom: 0.5rem;
+}
+#delete-btn{
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  color: rgb(255, 96, 96);
+}
+#close-cart{
+  background: transparent;
+  border: none;
+  color: #111;
+  font-size: 1rem;
+  position: absolute;
+  right: 2rem;
+}
+.hidden {
+  display: none;
+}
+
+#checkout-btn {
+  border: none;
+  background: var(--dark);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#checkout-btn:hover {
+  background: var(--gold);
+  transform: scale(1.05);
+}
+
+#cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  border-top: 1px solid gray;
+  padding-top: 1rem;
+}
+
+#cart-total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--green);
 }

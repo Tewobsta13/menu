@@ -25,6 +25,9 @@
       <p>Here is our menu</p>
       <a href="#menu" class="menu-btn"> View Menu </a>
     </header>
+    <div id="cart-btn-container">
+      <button id="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
 
     <!-- ================= MENU ================= -->
 
@@ -41,16 +44,23 @@
             <div class="food-info">
               <div class="card-header">
                 <h3>Doro Wat</h3>
+                <p class="price">
+                  420 ETB
+                </p>
                 <span>Traditional</span>
               </div>
               
               
-              <div class="stars">★★★★★</div>
+              <span class="stars">★5</span>
               
               <p>Spicy Ethiopian chicken stew served with fresh injera.</p>
               
-              <div class="price">
-                420 ETB
+              <div class="add-section">
+                       <div id="item-quantity">
+                <button id="inc-item">-</button>
+                <div id="quantity">0</div>
+                <button class="dec-item">+</button>
+              </div>
                 
                 <button onclick="alert("Order Added")">Add Order</button>
               </div>
@@ -237,7 +247,46 @@
             </div>
           </div>
       </section>
+      <section id="cart-dialog">
+
+        <div id="cart">
+          <button id="close-cart">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div id="cart-header">
+            <h2>your cart</h2>
+            <p>Pleace check your selected items then checkout</p>
+          </div>
+          <div id="cart-items">
+            <div id="cart-item">
+
+              <div>
+                
+                <h3 class="item-name">food name</h3>
+              </div>
+              <div class="price">
+                price
+              </div>
+              <div id="item-quantity">
+                <button id="inc-item">-</button>
+                <div id="quantity">0</div>
+                <button class="dec-item">+</button>
+              </div>
+              <button id="delete-btn">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              
+            </div>
+          </div>
+          <div id="cart-footer">
+            <span id="cart-total">Total: <strong>0 ETB</strong></span>
+            <button id="checkout-btn">Checkout</button>
+          </div>
+        </div>
+
+      </section>
     </main>
+    
 
     <!-- FOOTER -->
     <footer>
@@ -252,5 +301,6 @@
       </div>
       <p>© 2026 Brooklyn's Cafe. All Rights Reserved.</p>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>
