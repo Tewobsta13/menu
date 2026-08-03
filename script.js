@@ -116,7 +116,7 @@ function renderCart() {
       <div class="cart-item-row">
         <div class="cart-item-name">
           <h3>${item.name}</h3>
-          <small class="cart-item-subtotal">${subtotal} ETB</small>
+          <p class="cart-item-subtotal">${subtotal} ETB</p>
         </div>
         <div class="cart-item-price">${item.price} ETB</div>
         <div class="item-quantity">
