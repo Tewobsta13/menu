@@ -29,11 +29,6 @@ function createFoodCard(food) {
         <p>${food.description}</p>
 
         <div class="add-section">
-          <div class="item-quantity">
-            <button class="dec-qty">-</button>
-            <div class="qty-display">0</div>
-            <button class="inc-qty">+</button>
-          </div>
           <button onclick="alert('Order Added')">Add Order</button>
         </div>
       </div>

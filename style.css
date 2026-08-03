@@ -190,6 +190,7 @@ img {
 
 .add-section button {
   border: none;
+  width: 100%;
   background: var(--dark);
   color: white;
   padding: 12px 22px;
