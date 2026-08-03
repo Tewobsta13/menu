@@ -37,9 +37,8 @@ function addToCart(foodId) {
   updateCartBadge();
   renderCart();
 
-  
   let btn = document.querySelector(
-    `.add-section button[onclick="addToCart(${food.id})"]`
+    `.add-section button[onclick="addToCart(${food.id})"]`,
   );
   if (btn) {
     let original = btn.textContent;
@@ -107,7 +106,7 @@ function renderCart() {
   let grandTotal = 0;
   let html = "";
 
-  cart.map( (item)=> {
+  cart.map((item) => {
     let subtotal = item.price * item.quantity;
     grandTotal += subtotal;
     html += `
@@ -166,12 +165,16 @@ function createFoodCard(food) {
   `;
 }
 
-function renderMenu() {
+function renderMenu(category = "All") {
   const container = document.getElementById("menu-container");
 
-  const categories = [...new Set(foods.map((f) => f.category))];
+  container.innerHTML = "";
 
-  // category names
+  const categories =
+    category === "All"
+      ? [...new Set(foods.map((f) => f.category))]
+      : [category];
+
   const categoryTitles = {
     Ethiopian: "Ethiopian Favorites",
     International: "International Cuisine",
@@ -179,13 +182,15 @@ function renderMenu() {
   };
 
   categories.forEach((category) => {
-    const items = foods.filter((f) => f.category === category);
+    const items = foods.filter((food) => food.category === category);
 
     const section = document.createElement("section");
+
     section.className = "menu-section";
 
     section.innerHTML = `
-      <h2>${categoryTitles[category] || category}</h2>
+      <h2>${categoryTitles[category]}</h2>
+
       <div class="food-grid">
         ${items.map(createFoodCard).join("")}
       </div>
@@ -193,6 +198,9 @@ function renderMenu() {
 
     container.appendChild(section);
   });
+}
+function filterMenu(category) {
+  renderMenu(category);
 }
 
 renderMenu();

@@ -3,7 +3,7 @@
 ===================== */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap");
 :root {
   --gold: #d4a017;
   --dark: #121212;
@@ -58,7 +58,7 @@ img {
 }
 
 .header h1 {
-  font-family: "Merienda",sans-serif;
+  font-family: "Merienda", sans-serif;
   font-size: 4rem;
   margin-bottom: 15px;
 }
@@ -153,7 +153,7 @@ img {
   font-size: 1.5rem;
 }
 
-.card-header{
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -164,7 +164,7 @@ img {
 .stars {
   color: #fbbf24;
   letter-spacing: 3px;
-  right:2rem;
+  right: 2rem;
 }
 
 .food-info p {
@@ -174,7 +174,7 @@ img {
 }
 
 /* PRICE AREA */
-.price{
+.price {
   color: var(--green);
   font-size: 22px;
   font-weight: 700;
@@ -202,9 +202,35 @@ img {
 .add-section button:hover {
   background: var(--gold);
   transform: scale(1.05);
-
+}
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 40px 0;
+  flex-wrap: wrap;
 }
 
+.filter-buttons button {
+  background: #f5b700;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-buttons button:hover {
+  transform: translateY(-3px);
+  background: #d99f00;
+}
+
+.filter-buttons button:active {
+  transform: scale(0.95);
+}
 /* =====================
  FOOTER
 ===================== */
@@ -220,7 +246,7 @@ footer h2 {
   color: var(--gold);
   font-size: 30px;
   margin-bottom: 15px;
-  font-family: "Merienda",sans-serif;
+  font-family: "Merienda", sans-serif;
 }
 
 footer p {
@@ -243,7 +269,26 @@ footer p {
   color: var(--gold);
   transform: translateY(-5px);
 }
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #f5b700;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.3s ease;
+  z-index: 9999;
+}
 
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 @media (max-width: 700px) {
   .header h1 {
     font-size: 35px;
@@ -262,23 +307,22 @@ footer p {
   padding: 1rem;
   background: #f6e5a8;
   padding: 1rem;
-  border-radius:100%;
+  border-radius: 100%;
   font-size: 11px;
   border: 1px solid #886000;
   position: absolute;
   bottom: 3rem;
   right: 3rem;
-position: fixed;
+  position: fixed;
 }
-#cart-btn{
+#cart-btn {
   border: none;
   background: transparent;
   font-size: 2rem;
   color: #886000;
-
 }
 
-#cart-dialog{
+#cart-dialog {
   display: none;
   align-items: center;
   justify-content: center;
@@ -295,7 +339,7 @@ position: fixed;
   display: flex;
 }
 
-#cart{
+#cart {
   background: #fff;
   padding: 2rem;
   border-radius: 2rem;
@@ -305,8 +349,8 @@ position: fixed;
   max-width: 90vw;
 }
 
-#cart-item{
-  display:flex;
+#cart-item {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid rgb(196, 196, 196);
@@ -333,18 +377,18 @@ position: fixed;
   color: #111;
   cursor: pointer;
 }
-#cart-header{
- margin-bottom: 2rem;
- border-bottom: 1px solid gray;
- padding-bottom: 0.5rem;
+#cart-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid gray;
+  padding-bottom: 0.5rem;
 }
-#delete-btn{
+#delete-btn {
   border: none;
   background: transparent;
   font-size: 1.5rem;
   color: rgb(255, 96, 96);
 }
-#close-cart{
+#close-cart {
   background: transparent;
   border: none;
   color: #111;
