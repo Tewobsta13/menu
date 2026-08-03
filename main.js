@@ -5,6 +5,7 @@ const cartDialog = document.getElementById("cart-dialog");
 const closeCartBtn = document.getElementById("close-cart");
 
 cartBtn.addEventListener("click", () => {
+  renderCart();
   cartDialog.classList.add("open");
 });
 

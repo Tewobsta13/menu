@@ -13,7 +13,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-
   </head>
 
   <body>
@@ -27,7 +26,10 @@
       <a href="#menu" class="menu-btn"> View Menu </a>
     </header>
     <div id="cart-btn-container">
-      <button id="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button id="cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i
+        ><span id="cart-count" class="cart-count hidden">0</span>
+      </button>
     </div>
 
     <!-- ================= MENU ================= -->
@@ -36,7 +38,6 @@
       <div id="menu-container"></div>
 
       <section id="cart-dialog">
-
         <div id="cart">
           <button id="close-cart">
             <i class="fa-solid fa-xmark"></i>
@@ -45,36 +46,14 @@
             <h2>your cart</h2>
             <p>Pleace check your selected items then checkout</p>
           </div>
-          <div id="cart-items">
-            <div id="cart-item">
-
-              <div>
-                
-                <h3 class="item-name">food name</h3>
-              </div>
-              <div class="price">
-                price
-              </div>
-              <div id="item-quantity">
-                <button id="inc-item">-</button>
-                <div id="quantity">0</div>
-                <button class="dec-item">+</button>
-              </div>
-              <button id="delete-btn">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-              
-            </div>
-          </div>
+          <div id="cart-items"></div>
           <div id="cart-footer">
             <span id="cart-total">Total: <strong>0 ETB</strong></span>
             <button id="checkout-btn">Checkout</button>
           </div>
         </div>
-
       </section>
     </main>
-    
 
     <!-- FOOTER -->
     <footer>
