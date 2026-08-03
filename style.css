@@ -258,7 +258,7 @@ footer p {
   }
 }
 #cart-btn-container{
-  z-index: 1;
+  z-index: 101;
   padding: 1rem;
   background: #f6e5a8;
   padding: 1rem;
