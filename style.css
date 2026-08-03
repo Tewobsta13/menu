@@ -302,7 +302,8 @@ footer p {
     height: 200px;
   }
 }
-#cart-btn-container {
+#cart-btn-container{
+  z-index: 101;
   padding: 1rem;
   background: #f6e5a8;
   padding: 1rem;
