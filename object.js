@@ -8,6 +8,7 @@ const foods = [
     type: "Traditional",
     price: 420,
     rating: 5,
+    quantity: 1,
     image: "images/dorowat.jpg",
     description: "Spicy Ethiopian chicken stew served with fresh injera.",
   },
