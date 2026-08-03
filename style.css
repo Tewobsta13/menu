@@ -321,6 +321,7 @@ footer p {
   position: fixed;
 }
 #cart-btn {
+  cursor: pointer;
   border: none;
   background: transparent;
   font-size: 2rem;
