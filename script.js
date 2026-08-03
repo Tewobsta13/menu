@@ -3,30 +3,28 @@ const sortByPrice = function (arr) {
   return [...arr].sort((a, b) => a.price - b.price);
 };
 
-var cart = [];
+let cart = [];
 
 // =====================
 //  CART LOGIC
 // =====================
 
 function addToCart(foodId) {
-  var food = null;
-  for (var i = 0; i < foods.length; i++) {
+  let food = null;
+  for (let i = 0; i < foods.length; i++) {
     if (foods[i].id == foodId) {
       food = foods[i];
     }
   }
   if (!food) return;
-
-  var found = false;
-  for (var j = 0; j < cart.length; j++) {
+  let found = false;
+  for (let j = 0; j < cart.length; j++) {
     if (cart[j].id == foodId) {
       cart[j].quantity += 1;
       found = true;
       break;
     }
   }
-
   if (!found) {
     cart.push({
       id: food.id,
@@ -40,11 +38,11 @@ function addToCart(foodId) {
   renderCart();
 
   
-  var btn = document.querySelector(
+  let btn = document.querySelector(
     `.add-section button[onclick="addToCart(${food.id})"]`
   );
   if (btn) {
-    var original = btn.textContent;
+    let original = btn.textContent;
     btn.textContent = "✓ Added!";
     alert("Order Added!");
     btn.style.background = "var(--green)";
@@ -56,7 +54,7 @@ function addToCart(foodId) {
 }
 
 function changeQuantity(foodId, delta) {
-  for (var i = 0; i < cart.length; i++) {
+  for (let i = 0; i < cart.length; i++) {
     if (cart[i].id == foodId) {
       cart[i].quantity += delta;
       if (cart[i].quantity <= 0) {
@@ -78,8 +76,8 @@ function removeFromCart(foodId) {
 }
 
 function updateCartBadge() {
-  var badge = document.getElementById("cart-count");
-  var total = cart.reduce(function (sum, item) {
+  let badge = document.getElementById("cart-count");
+  let total = cart.reduce(function (sum, item) {
     return sum + item.quantity;
   }, 0);
 
@@ -92,8 +90,8 @@ function updateCartBadge() {
 }
 
 function renderCart() {
-  var container = document.getElementById("cart-items");
-  var totalEl = document.getElementById("cart-total");
+  let container = document.getElementById("cart-items");
+  let totalEl = document.getElementById("cart-total");
 
   if (cart.length === 0) {
     container.innerHTML = `
@@ -106,11 +104,11 @@ function renderCart() {
     return;
   }
 
-  var grandTotal = 0;
-  var html = "";
+  let grandTotal = 0;
+  let html = "";
 
   cart.map( (item)=> {
-    var subtotal = item.price * item.quantity;
+    let subtotal = item.price * item.quantity;
     grandTotal += subtotal;
     html += `
       <div class="cart-item-row">
