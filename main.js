@@ -1,5 +1,5 @@
 
-
+let cart = [];
 const cartBtn = document.getElementById("cart-btn");
 const cartDialog = document.getElementById("cart-dialog");
 const closeCartBtn = document.getElementById("close-cart");

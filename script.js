@@ -29,11 +29,22 @@ function createFoodCard(food) {
         <p>${food.description}</p>
 
         <div class="add-section">
-          <button onclick="alert('Order Added')">Add Order</button>
+<button onclick="addToCart(${food.id})">
+    Add Order
+</button>
         </div>
       </div>
     </div>
   `;
+}
+function addToCart(id) {
+
+    const food = foods.find(item => item.id === id);
+
+    cart.push(food);
+
+    renderCart();
+
 }
 
 // ── Render ─────────────────────────────────────────────────────────────────
@@ -69,3 +80,41 @@ function renderMenu() {
 }
 
 renderMenu();
+function renderCart() {
+
+    const cartItems = document.getElementById("cart-items");
+
+    cartItems.innerHTML = "";
+
+    cart.forEach(function(food) {
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <div>
+                    <h3>${food.name}</h3>
+                </div>
+
+                <div class="price">
+                    ${food.price} ETB
+                </div>
+
+                <button onclick="deleteItem(${food.id})">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+
+            </div>
+        `;
+
+    });
+
+}
+function deleteItem(id) {
+
+    cart = cart.filter(function(food) {
+        return food.id !== id;
+    });
+
+    renderCart();
+
+}
