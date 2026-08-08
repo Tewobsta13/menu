@@ -1,3 +1,6 @@
+const checkoutBtn = document.getElementById("checkout-btn");
+const order = document.getElementById("order");
+
 // sort method
 const sortByPrice = function (arr) {
   return [...arr].sort((a, b) => a.price - b.price);
@@ -5,9 +8,7 @@ const sortByPrice = function (arr) {
 
 let cart = [];
 
-// =====================
 //  CART LOGIC
-// =====================
 
 function addToCart(foodId) {
   let food = null;
@@ -43,7 +44,7 @@ function addToCart(foodId) {
   if (btn) {
     let original = btn.textContent;
     btn.textContent = "✓ Added!";
-    alert("Order Added!");
+    handleNotificationTrigger(`${food.name} added to your cart`, true);
     btn.style.background = "var(--green)";
     setTimeout(function () {
       btn.textContent = original;
@@ -67,7 +68,7 @@ function changeQuantity(foodId, delta) {
 }
 
 function removeFromCart(foodId) {
-  cart = cart.filter(function (item) {
+  cart = cart.filter((item) => {
     return item.id !== foodId;
   });
   updateCartBadge();
@@ -201,6 +202,70 @@ function renderMenu(category = "All") {
 }
 function filterMenu(category) {
   renderMenu(category);
+}
+
+//Confierm Dialog
+const renderSummery = () => {
+  const summery = document.getElementById("checkout-list");
+  const totalSummery = document.getElementById("summery-total");
+  let totalPrice = 0;
+  totalSummery.innerHTML = "0 ETB";
+
+  summery.innerHTML = "";
+  cart.forEach((item) => {
+    const summeryItem = document.createElement("div");
+    summeryItem.classList.add("summery-item");
+    summeryItem.innerHTML = `
+    <h5>${item.name}</h5>
+    <p>${item.price + " "}<i class="fa-solid fa-xmark"></i>${" " + item.quantity}</p>
+    <p>${item.price * item.quantity} ETB</p>
+    `;
+    totalPrice += item.price * item.quantity;
+    console.log(totalPrice);
+
+    summery.appendChild(summeryItem);
+  });
+  console.log(totalPrice);
+
+  totalSummery.innerHTML = totalPrice + " ETB";
+};
+
+checkoutBtn.addEventListener("click", () => {
+  cartPopup.classList.remove("open");
+  confirmDialog.classList.add("open");
+  renderSummery();
+});
+order.addEventListener("click", () => {
+  cartDialog.classList.remove("open");
+  cartPopup.classList.remove("open");
+  confirmDialog.classList.remove("open");
+  if (cart.length <= 0) {
+    handleNotificationTrigger("You have zero items in the cart", false);
+  } else {
+    cart = [];
+    handleNotificationTrigger("Your ordered successfully", true);
+  }
+});
+
+//NOtification trigger
+
+function handleNotificationTrigger(message, isSuccess) {
+  const notification = document.getElementById("notification");
+
+  notification.innerHTML = "";
+  notification.innerHTML = message;
+  if (isSuccess) {
+    notification.classList.add("success");
+  } else {
+    notification.classList.add("error");
+  }
+  notification.classList.add("open");
+
+  setTimeout(() => {
+    notification.classList.remove("open");
+    notification.classList.remove("error");
+    notification.classList.remove("success");
+  }, 2000);
 }
 
 renderMenu();

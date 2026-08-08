@@ -26,16 +26,19 @@
       <p>Here is our menu</p>
       <a href="#menu" class="menu-btn"> View Menu </a>
     </header>
-    <div id="cart-btn-container">
-      <button id="cart-btn">
-        <i class="fa-solid fa-cart-shopping"></i
-        ><span id="cart-count" class="cart-count hidden">0</span>
-      </button>
-    </div>
 
     <!-- ================= MENU ================= -->
 
     <main id="menu">
+      <div id="notification"></div>
+
+      <div id="cart-btn-container">
+        <button id="cart-btn">
+          <i class="fa-solid fa-cart-shopping"></i
+          ><span id="cart-count" class="cart-count hidden">0</span>
+        </button>
+      </div>
+
       <div class="filter-buttons">
         <button onclick="filterMenu('All')">All</button>
         <button onclick="filterMenu('Ethiopian')">Ethiopian</button>
@@ -44,9 +47,11 @@
       </div>
       <div id="menu-container"></div>
 
+      <!-- Dialogs -->
+
       <section id="cart-dialog">
-        <div id="cart">
-          <button id="close-cart">
+        <div class="cart" id="cart">
+          <button class="close-dialog" id="close-cart">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div id="cart-header">
@@ -57,6 +62,22 @@
           <div id="cart-footer">
             <span id="cart-total">Total: <strong>0 ETB</strong></span>
             <button id="checkout-btn">Checkout</button>
+          </div>
+        </div>
+
+        <div class="confirm-checkout cart" id="confirm-dialog">
+          <button class="close-dialog" id="close-summery">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <h4>Are you sure you want to order the following foods</h4>
+          <div id="checkout-list"></div>
+
+          <div class="summery-total-container">
+            Total:<strong id="summery-total"></strong>
+          </div>
+          <div class="summery-footer">
+            <button class="btn" id="cancel">Cancel</button>
+            <button class="btn" id="order">Order</button>
           </div>
         </div>
       </section>
