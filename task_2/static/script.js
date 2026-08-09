@@ -7,6 +7,7 @@ const sortByPrice = function (arr) {
 };
 
 let cart = [];
+let foods = [];
 
 //  CART LOGIC
 
@@ -268,4 +269,43 @@ function handleNotificationTrigger(message, isSuccess) {
   }, 2000);
 }
 
-renderMenu();
+
+
+
+fetch("/foods")
+.then((response)=>{
+  if(!response.ok){
+    throw new Error(`http Error : ${response.status}`);
+  }
+
+  return response.json();
+})
+.then((data)=>{
+  foods = data
+  renderMenu();
+})
+.catch((error)=>{   console.error("can not load the food ", error)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// renderMenu();
