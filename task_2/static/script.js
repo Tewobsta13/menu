@@ -236,16 +236,44 @@ checkoutBtn.addEventListener("click", () => {
   confirmDialog.classList.add("open");
   renderSummery();
 });
-order.addEventListener("click", () => {
+order.addEventListener("click", async() => {
   cartDialog.classList.remove("open");
   cartPopup.classList.remove("open");
   confirmDialog.classList.remove("open");
   if (cart.length <= 0) {
     handleNotificationTrigger("You have zero items in the cart", false);
-  } else {
+    return
+  } 
+  try {
+    const response = await fetch("/orders", {
+      method : "POST",
+      headers : {
+       "Content-Type": "application/json"
+      },
+      body :  JSON.stringify(cart)
+      
+    });
+    if(!response.ok){
+      throw new Error(`HTTP error ${response.status}`)
+    }
+    const savedOrder = await response.json();
+    console.log("Order saved:", savedOrder);
     cart = [];
-    handleNotificationTrigger("Your ordered successfully", true);
+    updateCartBadge();
+    renderCart();
+    handleNotificationTrigger("Your order was successfully placed", true);
+    
+    
+  } catch (error) {
+    console.error("Could not place order:", error);
+    handleNotificationTrigger( "Could not place your order", false );
+    
   }
+  
+                  // else {
+                  //   cart = [];
+                  //   handleNotificationTrigger("Your ordered successfully", true);
+                  // }
 });
 
 //NOtification trigger
@@ -289,23 +317,3 @@ fetch("/foods")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// renderMenu();
