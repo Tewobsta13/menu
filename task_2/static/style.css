@@ -325,6 +325,19 @@ footer p {
   right: 3rem;
   position: fixed;
 }
+#orders-btn{
+  z-index: 101;
+  padding: 1rem;
+  background: #f6e5a8;
+  padding: 1rem;
+  border-radius: 100%;
+  font-size: 11px;
+  border: 1px solid #886000;
+  position: absolute;
+  bottom: 3rem;
+  right: 10rem;
+  position: fixed;
+}
 
 #cart-btn {
   cursor: pointer;
@@ -680,4 +693,137 @@ footer p {
 
 #notification.open {
   display: block;
+}
+
+.orders-popup {
+    display: none;
+}
+
+
+.orders-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.orders-content {
+    position: relative;
+
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+
+    background: white;
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    animation: ordersPopupOpen 0.25s ease;
+}
+
+/* Header stays at the top */
+.orders-header {
+    position: relative;
+
+    padding: 25px 30px 20px;
+
+    background: white;
+
+    border-bottom: 1px solid #eee;
+}
+
+.orders-header h2 {
+    margin: 0;
+    text-align: center;
+}
+
+/* Close button */
+#close-orders {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Hover effect */
+#close-orders:hover {
+    background-color: #f1f1f1;
+
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Optional click effect */
+#close-orders:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Only the orders scroll */
+#orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    max-height: 60vh;
+
+    overflow-y: auto;
+
+    padding: 20px 30px;
+}
+
+/* Individual order */
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px;
+
+    background: #f7f7f7;
+
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+}
+
+.order-item h3 {
+    margin: 0 0 8px;
+}
+
+.order-item p {
+    margin: 4px 0;
+}
+
+.order-item strong {
+    font-size: 18px;
 }

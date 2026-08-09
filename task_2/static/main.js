@@ -6,6 +6,12 @@ const cancelOrderBtn=document.getElementById("cancel");
 const cartPopup=document.getElementById("cart");
 const confirmDialog=document.getElementById("confirm-dialog");
 
+const ordersBtn = document.getElementById("orders-btn");
+const ordersPopup = document.getElementById("orders-popup");
+const closeOrders = document.getElementById("close-orders");
+
+
+
 cartBtn.addEventListener("click", () => {
   renderCart();
   cartDialog.classList.add("open");
@@ -29,3 +35,15 @@ cancelOrderBtn.addEventListener("click",()=>{
   cartPopup.classList.remove("open");
   confirmDialog.classList.remove("open");
 })
+
+
+
+
+ordersBtn.addEventListener("click", () => {
+    ordersPopup.style.display = "flex";
+    loadOrders();
+});
+
+closeOrders.addEventListener("click", () => {
+    ordersPopup.style.display = "none";
+});

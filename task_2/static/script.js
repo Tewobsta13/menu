@@ -300,6 +300,64 @@ function handleNotificationTrigger(message, isSuccess) {
 
 
 
+async function loadOrders() {
+    const container = document.getElementById("orders-container");
+
+    try {
+        const response = await fetch("/orders");
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const orders = await response.json();
+
+        console.log("Orders:", orders);
+
+        container.innerHTML = "";
+
+        if (orders.length === 0) {
+            container.innerHTML = `
+                <p>No orders found.</p>
+            `;
+            return;
+        }
+
+        orders.forEach((order) => {
+            const orderElement = document.createElement("div");
+
+            orderElement.classList.add("order-item");
+
+            orderElement.innerHTML = `
+                <div>
+                    <h3>${order.name}</h3>
+                    <p>Quantity: ${order.quantity}</p>
+                    <p>Price: ${order.price} ETB</p>
+                </div>
+
+                <strong>
+                    ${order.price * order.quantity} ETB
+                </strong>
+            `;
+
+            container.appendChild(orderElement);
+        });
+
+    } catch (error) {
+        console.error("Could not load orders:", error);
+
+        container.innerHTML = `
+            <p>Could not load orders.</p>
+        `;
+    }
+}
+
+
+
+
+
+
+
 fetch("/foods")
 .then((response)=>{
   if(!response.ok){

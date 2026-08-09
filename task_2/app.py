@@ -25,3 +25,9 @@ def create_order():
     with open("static/data/orders.json", "w") as file:
         json.dump(orders, file, indent = 4)
     return jsonify(order), 201
+
+@app.route("/orders", methods= ["GET"])
+def get_orders():
+    with open("static/data/orders.json", "r") as file:
+        orders = json.load(file)
+    return jsonify(orders)
