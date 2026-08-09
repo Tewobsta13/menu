@@ -1,35 +1,68 @@
 from flask import Flask, jsonify, render_template, request
 import json
-
+import os
 
 app = Flask(__name__, template_folder="template")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/foods", methods=["GET"])
 def get_foods():
-    with open("static/data/foodData.json", "r") as file:
-        foods = json.load(file)
-    return jsonify(foods)
+    food_file = os.path.join(
+        BASE_DIR,
+        "static",
+        "data",
+        "foodData.json"
+    )
 
+    with open(food_file, "r") as file:
+        foods = json.load(file)
+
+    return jsonify(foods)
 
 
 @app.route("/orders", methods=["POST"])
 def create_order():
     order = request.get_json()
-    with open("static/data/orders.json", "r") as file:
+
+    orders_file = os.path.join(
+        BASE_DIR,
+        "static",
+        "data",
+        "orders.json"
+    )
+
+    with open(orders_file, "r") as file:
         orders = json.load(file)
+
     orders.append(order)
-    with open("static/data/orders.json", "w") as file:
-        json.dump(orders, file, indent = 4)
+
+    with open(orders_file, "w") as file:
+        json.dump(orders, file, indent=4)
+
     return jsonify(order), 201
 
-@app.route("/orders", methods= ["GET"])
+
+@app.route("/orders", methods=["GET"])
 def get_orders():
-    with open("static/data/orders.json", "r") as file:
+    orders_file = os.path.join(
+        BASE_DIR,
+        "static",
+        "data",
+        "orders.json"
+    )
+
+    with open(orders_file, "r") as file:
         orders = json.load(file)
+
     return jsonify(orders)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
