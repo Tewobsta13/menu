@@ -7,7 +7,7 @@ const sortByPrice = function (arr) {
 };
 
 let cart = [];
-
+let foods = [];
 //  CART LOGIC
 
 function addToCart(foodId) {
@@ -235,15 +235,44 @@ checkoutBtn.addEventListener("click", () => {
   confirmDialog.classList.add("open");
   renderSummery();
 });
-order.addEventListener("click", () => {
+order.addEventListener("click", async () => {
   cartDialog.classList.remove("open");
   cartPopup.classList.remove("open");
   confirmDialog.classList.remove("open");
   if (cart.length <= 0) {
     handleNotificationTrigger("You have zero items in the cart", false);
-  } else {
-    cart = [];
-    handleNotificationTrigger("Your ordered successfully", true);
+    return;
+  }
+
+  let grandTotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+  const payload = {
+    orderId: Date.now(),
+    items: cart,
+    total: grandTotal,
+    createdAt: new Date().toLocaleString(),
+  };
+
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      cart = [];
+      renderCart();
+      updateCartBadge();
+      handleNotificationTrigger("Your order was placed successfully!", true);
+      fetchOrdersHistory();
+    } else {
+      handleNotificationTrigger("Failed to place order", false);
+    }
+  } catch (err) {
+    handleNotificationTrigger("Server connection error!", false);
   }
 });
 
@@ -269,3 +298,45 @@ function handleNotificationTrigger(message, isSuccess) {
 }
 
 renderMenu();
+
+async function fetchMenuData() {
+  try {
+    const res = await fetch("/api/menu");
+    foods = await res.json();
+    renderMenu();
+  } catch (err) {
+    console.error("Menu ማምጣት አልተቻለም:", err);
+  }
+}
+
+// 2. Task 2:
+async function fetchOrdersHistory() {
+  const container = document.getElementById("ordersHistory");
+  if (!container) return;
+
+  try {
+    const res = await fetch("/api/orders");
+    const orders = await res.json();
+
+    if (orders.length === 0) {
+      container.innerHTML = "<p>No past orders.</p>";
+      return;
+    }
+
+    container.innerHTML = orders
+      .map(
+        (ord) => `
+      <div class="order-history-card" style="border:1px solid #ccc; padding:10px; margin:5px 0; border-radius: 5px;">
+        <p><strong>Order ID:</strong> #${ord.orderId}</p>
+        <p><strong>Total Price:</strong> ${ord.total} ETB</p>
+      </div>
+    `,
+      )
+      .join("");
+  } catch (err) {
+    console.error("History ማምጣት አልተቻለም", err);
+  }
+}
+
+fetchMenuData();
+fetchOrdersHistory();
