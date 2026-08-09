@@ -235,6 +235,7 @@ checkoutBtn.addEventListener("click", () => {
   confirmDialog.classList.add("open");
   renderSummery();
 });
+
 order.addEventListener("click", () => {
   cartDialog.classList.remove("open");
   cartPopup.classList.remove("open");
@@ -242,8 +243,24 @@ order.addEventListener("click", () => {
   if (cart.length <= 0) {
     handleNotificationTrigger("You have zero items in the cart", false);
   } else {
-    cart = [];
-    handleNotificationTrigger("Your ordered successfully", true);
+    fetch("/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(cart)
+    })
+    .then(response => response.json())
+    .then((data) => {
+      cart = [];
+      updateCartBadge();
+      renderCart();
+      handleNotificationTrigger("Your ordered successfully", true);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      handleNotificationTrigger("Failed to place order", false);
+    });
   }
 });
 
