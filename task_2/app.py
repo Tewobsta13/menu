@@ -31,3 +31,5 @@ def get_orders():
     with open("static/data/orders.json", "r") as file:
         orders = json.load(file)
     return jsonify(orders)
+if __name__ == "__main__":
+    app.run(debug=True)
