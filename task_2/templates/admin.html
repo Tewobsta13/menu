@@ -24,7 +24,7 @@
 
       <div class="order-card">
         <div class="order-header">
-          <h2>Order #{{ order.id }}</h2>
+          <h2>Order #{{ order.order_id }}</h2>
 
           <span class="status {{ order.status|lower }}">
             {{ order.status }}
@@ -39,17 +39,14 @@
 
           <p>
             <strong>Food:</strong>
-            {{ order.items }}
-          </p>
-
-          <p>
-            <strong>Quantity:</strong>
-            {{ order.quantity }}
+            {% for item in order.order_items %}
+              {{ item.item }} (x{{ item.quantity }}){% if not loop.last %}, {% endif %}
+            {% endfor %}
           </p>
 
           <p>
             <strong>Total:</strong>
-            {{ order.total_price }} ETB
+            {{ order.order_total }} ETB
           </p>
 
           <p>
@@ -61,13 +58,13 @@
         <div class="order-actions">
           {% if order.status != "Cancelled" %}
 
-          <button type="button" class="btn-cancel" data-id="{{ order.id }}">
+          <button type="button" class="btn-cancel" data-id="{{ order.order_id }}">
             Cancel Order
           </button>
 
           {% endif %}
 
-          <button type="button" class="btn-delete" data-id="{{ order.id }}">
+          <button type="button" class="btn-delete" data-id="{{ order.order_id }}">
             Delete
           </button>
         </div>
@@ -82,5 +79,7 @@
 
       {% endfor %}
     </main>
+
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
   </body>
 </html>

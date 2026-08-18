@@ -98,7 +98,7 @@ def group_orders(rows):
             "customer": first.customer,
             "date_time": first.date_time.strftime("%Y-%m-%d %H:%M:%S"),
             "status": first.status,
-            "items": [
+            "order_items": [
                 {"row_id": g.id, "item": g.item, "quantity": g.quantity,
                  "price": g.price, "total_price": g.total_price}
                 for g in group
@@ -124,27 +124,21 @@ def get_foods():
 
 @app.route("/orders", methods=["POST"])
 def create_order():
-    new_order = request.get_json()
+    data = request.get_json()
 
-    orders_file = os.path.join(
-        BASE_DIR,
-        "static",
-        "data",
-        "orders.json"
-    )
-
-    with open(orders_file, "r") as file:
-        orders = json.load(file)
-    if isinstance(new_order, list):
-        for order in new_order:
-            orders.append(order)
+    # data can be a list of cart items: [{name, price, quantity}, ...]
+    if isinstance(data, list):
+        items = [
+            {
+                "name": item.get("name", "Unknown"),
+                "quantity": int(item.get("quantity", 1)),
+                "price": float(item.get("price", 0.0)),
+            }
+            for item in data
+        ]
+        save_order({"customer": "Guest", "items": items})
     else:
-            orders.append(new_order)
-            
-    
-
-    with open(orders_file, "w") as file:
-        json.dump(orders, file, indent=4)
+        save_order(data)
 
     return jsonify({"message": "Order saved"}), 201
 
@@ -156,19 +150,20 @@ def get_orders():
 
 
 # ADMIN ROUTES
-@app.route("/admin/orders", methods=["GET", "POST","DELETE","PUT"])
+@app.route("/admin/orders", methods=["GET", "POST"])
 def admin_orders():
-    # Handle status update (cancel) / delete actions submitted from the page
+    # Handle cancel / delete actions submitted via HTML forms
     if request.method == "POST":
         order_id = request.form.get("order_id")
+        action = request.form.get("action")
 
-        if request.method == "PUT" and order_id:
+        if action == "cancel" and order_id:
             rows = Order.query.filter_by(order_id=order_id).all()
             for r in rows:
                 r.status = "Cancelled"
             db.session.commit()
 
-        elif request.method == "DELETE" and order_id:
+        elif action == "delete" and order_id:
             Order.query.filter_by(order_id=order_id).delete()
             db.session.commit()
 
@@ -176,12 +171,46 @@ def admin_orders():
 
     rows = Order.query.all()
     orders = group_orders(rows)
-    return render_template("admin_orders.html", orders=orders)
+    return render_template("admin.html", orders=orders)
+
+
+@app.route("/admin/orders/<order_id>/cancel", methods=["POST"])
+def admin_cancel_order(order_id):
+    rows = Order.query.filter_by(order_id=order_id).all()
+    if not rows:
+        return jsonify({"error": "Order not found"}), 404
+    for r in rows:
+        r.status = "Cancelled"
+    db.session.commit()
+    return jsonify({"message": f"Order {order_id} cancelled"})
+
+
+@app.route("/admin/orders/<order_id>/delete", methods=["POST"])
+def admin_delete_order(order_id):
+    count = Order.query.filter_by(order_id=order_id).delete()
+    if count == 0:
+        return jsonify({"error": "Order not found"}), 404
+    db.session.commit()
+    return jsonify({"message": f"Order {order_id} deleted"})
 
 
 @app.route("/admin/add", methods=["GET", "POST"])
 def admin_add():
     if request.method == "POST":
+        # Support JSON from admin.js
+        if request.is_json:
+            data = request.get_json()
+            customer = data.get("customer", "Guest")
+            item_name = data.get("items", "Unknown")
+            quantity = int(data.get("quantity", 1))
+            total_price = float(data.get("total_price", 0.0))
+            price = round(total_price / quantity, 2) if quantity else 0.0
+
+            items = [{"name": item_name, "quantity": quantity, "price": price}]
+            save_order({"customer": customer, "items": items})
+            return jsonify({"message": "Order added"}), 201
+
+        # Fallback: support regular form submission
         customer = request.form.get("customer", "Guest")
         item_names = request.form.getlist("item[]")
         quantities = request.form.getlist("quantity[]")
