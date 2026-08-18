@@ -118,18 +118,33 @@ def get_foods():
     food_file = os.path.join(BASE_DIR, "static", "data", "foodData.json")
     with open(food_file, "r") as file:
         foods = json.load(file)
-    return jsonify(foods)
+
+    return jsonify(foods),200
 
 
 @app.route("/orders", methods=["POST"])
 def create_order():
-    payload = request.get_json()
+    new_order = request.get_json()
 
-    if isinstance(payload, list):
-        for order_data in payload:
-            save_order(order_data)
+    orders_file = os.path.join(
+        BASE_DIR,
+        "static",
+        "data",
+        "orders.json"
+    )
+
+    with open(orders_file, "r") as file:
+        orders = json.load(file)
+    if isinstance(new_order, list):
+        for order in new_order:
+            orders.append(order)
     else:
-        save_order(payload)
+            orders.append(new_order)
+            
+    
+
+    with open(orders_file, "w") as file:
+        json.dump(orders, file, indent=4)
 
     return jsonify({"message": "Order saved"}), 201
 
