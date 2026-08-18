@@ -1,0 +1,297 @@
+/* =========================
+   ADMIN ADD ORDER PAGE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8ed;
+    color: #333;
+}
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.admin-page {
+    min-height: 100vh;
+    padding: 50px 20px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.admin-header h1 {
+    font-size: 42px;
+    color: #121212;
+    margin-bottom: 10px;
+}
+
+.admin-header p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   VIEW ORDERS BUTTON
+========================= */
+
+.admin-header a {
+    display: inline-block;
+    padding: 12px 25px;
+
+    background-color: #121212;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+.admin-header a:hover {
+    background-color: #d4a017;
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(212, 160, 23, 0.3);
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.add-order {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+    padding: 40px;
+
+    background-color: #ffffff;
+
+    border-radius: 20px;
+
+    border-top: 5px solid #d4a017;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   FORM TITLE
+========================= */
+
+.add-order h2 {
+    text-align: center;
+
+    font-size: 28px;
+
+    color: #121212;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+#admin-add-order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* =========================
+   LABELS
+========================= */
+
+#admin-add-order-form label {
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #121212;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+#admin-add-order-form input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #d6d6d6;
+
+    border-radius: 10px;
+
+    background-color: #ffffff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    color: #333;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+
+/* INPUT HOVER */
+
+#admin-add-order-form input:hover {
+    border-color: #aaa;
+}
+
+
+/* INPUT FOCUS */
+
+#admin-add-order-form input:focus {
+    border: 2px solid #d4a017;
+
+    box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.12);
+}
+
+
+/* PLACEHOLDER */
+
+#admin-add-order-form input::placeholder {
+    color: #aaa;
+}
+
+
+/* =========================
+   ADD ORDER BUTTON
+========================= */
+
+#admin-add-order-form button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background-color: #121212;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+
+/* BUTTON HOVER */
+
+#admin-add-order-form button:hover {
+    background-color: #d4a017;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 20px rgba(212, 160, 23, 0.3);
+}
+
+
+/* BUTTON CLICK */
+
+#admin-add-order-form button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   SMALL ADMIN BADGE
+========================= */
+
+.add-order::before {
+    content: "ADD ORDER";
+
+    display: block;
+
+    width: fit-content;
+
+    margin: 0 auto 15px;
+
+    padding: 5px 15px;
+
+    border-radius: 30px;
+
+    background-color: #f6e5a8;
+
+    color: #886000;
+
+    border: 1px solid #886000;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .admin-page {
+        padding: 30px 15px;
+    }
+
+    .admin-header h1 {
+        font-size: 32px;
+    }
+
+    .add-order {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+
+    .add-order h2 {
+        font-size: 24px;
+    }
+
+    .admin-header a {
+        padding: 10px 20px;
+    }
+}
