@@ -67,7 +67,13 @@ def get_orders():
         orders = json.load(file)
 
     return jsonify(orders)
+@app.errorhandler(404)
+def page_not_found(error):
+    return jsonify({"error": "Route not found"}), 404
 
 
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({"error": "Internal server error"}), 500
 if __name__ == "__main__":
     app.run(debug=True)
