@@ -236,25 +236,24 @@ checkoutBtn.addEventListener("click", () => {
   confirmDialog.classList.add("open");
   renderSummery();
 });
-order.addEventListener("click", async() => {
+order.addEventListener("click", async () => {
   cartDialog.classList.remove("open");
   cartPopup.classList.remove("open");
   confirmDialog.classList.remove("open");
   if (cart.length <= 0) {
     handleNotificationTrigger("You have zero items in the cart", false);
-    return
-  } 
+    return;
+  }
   try {
     const response = await fetch("/orders", {
-      method : "POST",
-      headers : {
-       "Content-Type": "application/json"
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body :  JSON.stringify(cart)
-      
+      body: JSON.stringify(cart),
     });
-    if(!response.ok){
-      throw new Error(`HTTP error ${response.status}`)
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
     }
     const savedOrder = await response.json();
     console.log("Order saved:", savedOrder);
@@ -262,18 +261,15 @@ order.addEventListener("click", async() => {
     updateCartBadge();
     renderCart();
     handleNotificationTrigger("Your order was successfully placed", true);
-    
-    
   } catch (error) {
     console.error("Could not place order:", error);
-    handleNotificationTrigger( "Could not place your order", false );
-    
+    handleNotificationTrigger("Could not place your order", false);
   }
-  
-                  // else {
-                  //   cart = [];
-                  //   handleNotificationTrigger("Your ordered successfully", true);
-                  // }
+
+  // else {
+  //   cart = [];
+  //   handleNotificationTrigger("Your ordered successfully", true);
+  // }
 });
 
 //NOtification trigger
@@ -297,81 +293,69 @@ function handleNotificationTrigger(message, isSuccess) {
   }, 2000);
 }
 
-
-
-
 async function loadOrders() {
-    const container = document.getElementById("orders-container");
+  const container = document.getElementById("orders-container");
 
-    try {
-        const response = await fetch("/orders");
+  try {
+    const response = await fetch("/orders");
 
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
+    if (!response.ok) {
+      throw new Error(`HTTP Error: ${response.status}`);
+    }
 
-        const orders = await response.json();
+    const orders = await response.json();
 
-        console.log("Orders:", orders);
+    console.log("Orders:", orders);
 
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        if (orders.length === 0) {
-            container.innerHTML = `
+    if (orders.length === 0) {
+      container.innerHTML = `
                 <p>No orders found.</p>
             `;
-            return;
-        }
+      return;
+    }
 
-        orders.forEach((order) => {
-            const orderElement = document.createElement("div");
+    orders.forEach((order) => {
+      const orderElement = document.createElement("div");
 
-            orderElement.classList.add("order-item");
+      orderElement.classList.add("order-item");
 
-            orderElement.innerHTML = `
+      orderElement.innerHTML = `
                 <div>
                     <h3>${order.name}</h3>
-                    <p>Quantity: ${order.quantity}</p>
-                    <p>Price: ${order.price} ETB</p>
+                    <p>${order.price} ETB</p>
                 </div>
-
+                    
+                    <p>${order.quantity + " " + `<i class="fa-solid fa-xmark"></i>` + " " + order.price}</p>
                 <strong>
                     ${order.price * order.quantity} ETB
                 </strong>
             `;
 
-            container.appendChild(orderElement);
-        });
+      container.appendChild(orderElement);
+    });
+  } catch (error) {
+    console.error("Could not load orders:", error);
 
-    } catch (error) {
-        console.error("Could not load orders:", error);
-
-        container.innerHTML = `
+    container.innerHTML = `
             <p>Could not load orders.</p>
         `;
-    }
+  }
 }
 
-
-
-
-
-
-
 fetch("/foods")
-.then((response)=>{
-  if(!response.ok){
-    throw new Error(`http Error : ${response.status}`);
-  }
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`http Error : ${response.status}`);
+    }
 
-  return response.json();
-})
-.then((data)=>{
-  foods = data
-  renderMenu();
-})
-.catch((error)=>{   console.error("can not load the food ", error)
-})
-
-
-
+    return response.json();
+  })
+  .then((data) => {
+    foods = data;
+    renderMenu();
+  })
+  .catch((error) => {
+    console.error("can not load the food ", error);
+  });

@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request
 import json
 import os
 
-app = Flask(__name__, template_folder="template")
+app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -40,8 +40,13 @@ def create_order():
 
     with open(orders_file, "r") as file:
         orders = json.load(file)
+    
+    if isinstance(order,list):
+        for ordr in order:        
+            orders.append(ordr)
+    else:
+        orders.append(order)
 
-    orders.append(order)
 
     with open(orders_file, "w") as file:
         json.dump(orders, file, indent=4)
