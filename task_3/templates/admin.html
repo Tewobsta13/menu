@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Orders</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='admin.css') }}"
+    />
+  </head>
+
+  <body>
+    <header class="admin-header">
+      <h1>Orders Dashboard</h1>
+
+      <a href="/admin/add" class="add-order-btn"> + Add Order </a>
+    </header>
+
+    <main class="orders-container">
+      {% for order in orders %}
+
+      <div class="order-card">
+        <div class="order-header">
+          <h2>Order #{{ order.order_id }}</h2>
+
+          <span class="status {{ order.status|lower }}">
+            {{ order.status }}
+          </span>
+        </div>
+
+        <div class="order-info">
+          <p>
+            <strong>Customer:</strong>
+            {{ order.customer }}
+          </p>
+
+          <p>
+            <strong>Food:</strong>
+            {% for item in order.order_items %}
+              {{ item.item }} (x{{ item.quantity }}){% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+
+          <p>
+            <strong>Total:</strong>
+            {{ order.order_total }} ETB
+          </p>
+
+          <p>
+            <strong>Date:</strong>
+            {{ order.date_time }}
+          </p>
+        </div>
+
+        <div class="order-actions">
+          {% if order.status != "Cancelled" %}
+
+          <button type="button" class="btn-cancel" data-id="{{ order.order_id }}">
+            Cancel Order
+          </button>
+
+          {% endif %}
+
+          <button type="button" class="btn-delete" data-id="{{ order.order_id }}">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="no-orders">
+        <h2>No orders yet</h2>
+        <p>There are currently no orders in the database.</p>
+      </div>
+
+      {% endfor %}
+    </main>
+
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+  </body>
+</html>
