@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("admin_token");
+  if (!token) {
+    window.location.href = "/admin/login";
+    return;
+  }
+
+  // Logout Action
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("admin_token");
+      document.cookie =
+        "admin_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = "/admin/login";
+    });
+  }
+
   // 1. Cancel Order Action
   const cancelButtons = document.querySelectorAll(".btn-cancel");
   cancelButtons.forEach((button) => {
@@ -14,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -52,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -116,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
         });
@@ -124,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok) {
           alert("New order added successfully!");
-          window.location.href = "/admin/orders"; 
+          window.location.href = "/admin/orders";
         } else {
           alert(result.error || "Failed to add order.");
         }
