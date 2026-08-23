@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("admin_token");
   if (!token) {
