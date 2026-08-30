@@ -86,10 +86,19 @@
 
     <div id="orders-popup" class="orders-popup">
       <div class="orders-content">
-      <button id="close-orders">&times;</button>
-        <h2>My Orders</h2>
+        <button class="close-dialog" id="close-orders">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="cart-header" style="margin-bottom: 1rem;">
+            <h2>Track My Order</h2>
+            <p>Enter your order ID below to check its status.</p>
+        </div>
+        <div class="order-search" style="margin-bottom: 1.5rem; display: flex; gap: 10px;">
+            <input type="text" id="order-id-input" placeholder="e.g. ORD-1234ABCD" style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 30px; outline: none; font-family: inherit;">
+            <button class="btn" id="search-order-btn" style="width: auto; background: var(--dark); color: white;">Search</button>
+        </div>
         <div id="orders-container">
-           
+
         </div>
     </div>
 </div>

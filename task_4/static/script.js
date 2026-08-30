@@ -260,7 +260,7 @@ order.addEventListener("click", async () => {
     cart = [];
     updateCartBadge();
     renderCart();
-    handleNotificationTrigger("Your order was successfully placed", true);
+    handleNotificationTrigger(`Your order was placed! ID: ${savedOrder.order_id}`, true);
   } catch (error) {
     console.error("Could not place order:", error);
     handleNotificationTrigger("Could not place your order", false);
@@ -293,55 +293,57 @@ function handleNotificationTrigger(message, isSuccess) {
   }, 2000);
 }
 
-async function loadOrders() {
-  const container = document.getElementById("orders-container");
-
-  try {
-    const response = await fetch("/orders");
-
-    if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status}`);
+const searchOrderBtn = document.getElementById("search-order-btn");
+if (searchOrderBtn) {
+  searchOrderBtn.addEventListener("click", async () => {
+    const orderIdInput = document.getElementById("order-id-input").value.trim();
+    if (!orderIdInput) {
+        handleNotificationTrigger("Please enter an Order ID", false);
+        return;
     }
 
-    const orders = await response.json();
+    const container = document.getElementById("orders-container");
+    container.innerHTML = "<p>Loading...</p>";
 
-    console.log("Orders:", orders);
+    try {
+      const response = await fetch(`/orders/${orderIdInput}`);
 
-    container.innerHTML = "";
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
 
-    if (orders.length === 0) {
+      const order = await response.json();
+      console.log("Order:", order);
+
       container.innerHTML = `
-                <p>No orders found.</p>
-            `;
-      return;
+        <div class="summery-item" style="display:flex; flex-direction:column; gap: 10px; align-items: stretch; border: 1px solid #eee; padding: 15px; border-radius: 15px; background: #fafafa;">
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+                <h5 style="font-size: 1.1rem; margin: 0;">Order #${order.order_id}</h5>
+                <span style="background: var(--dark); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">${order.status}</span>
+            </div>
+            <p style="text-align: left; margin: 0; font-size: 0.85rem; color: #666;">Date: ${order.date_time}</p>
+            
+            <div style="margin-top: 10px;">
+                ${order.order_items.map(item => `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.95rem;">
+                        <span>${item.quantity}x ${item.item}</span>
+                        <span style="font-weight: 600;">${item.total_price} ETB</span>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 1.1rem;">Total</strong>
+                <strong style="font-size: 1.1rem; color: var(--green);">${order.order_total} ETB</strong>
+            </div>
+        </div>
+      `;
+    } catch (error) {
+      console.error("Could not load order:", error);
+      container.innerHTML = `<p style="color:var(--red);">Order not found or an error occurred.</p>`;
     }
-
-    orders.forEach((order) => {
-      const orderElement = document.createElement("div");
-
-      orderElement.classList.add("order-item");
-
-      orderElement.innerHTML = `
-                <div>
-                    <h3>${order.name}</h3>
-                    <p>${order.price} ETB</p>
-                </div>
-                    
-                    <p>${order.quantity + " " + `<i class="fa-solid fa-xmark"></i>` + " " + order.price}</p>
-                <strong>
-                    ${order.price * order.quantity} ETB
-                </strong>
-            `;
-
-      container.appendChild(orderElement);
-    });
-  } catch (error) {
-    console.error("Could not load orders:", error);
-
-    container.innerHTML = `
-            <p>Could not load orders.</p>
-        `;
-  }
+  });
 }
 
 fetch("/foods")

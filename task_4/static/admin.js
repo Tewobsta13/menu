@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("admin_token");
   if (!token) {
@@ -11,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("admin_token");
-      document.cookie =
-        "admin_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "admin_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       window.location.href = "/admin/login";
     });
   }
@@ -32,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
         });
 
@@ -71,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
         });
 
@@ -136,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
         });
@@ -145,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok) {
           alert("New order added successfully!");
-          window.location.href = "/admin/orders";
+          window.location.href = "/admin/orders"; 
         } else {
           alert(result.error || "Failed to add order.");
         }

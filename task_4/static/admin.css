@@ -33,8 +33,9 @@ body {
   padding: 45px 8%;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
 
   color: white;
 }
@@ -413,4 +414,103 @@ body {
   .order-actions button {
     width: 100%;
   }
+}
+.logout-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.logout-btn:hover {
+  background-color: #c9302c;
+}
+
+/* =====================
+   CART SUMMERY STYLE FOR ADMIN
+===================== */
+
+.admin-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 2px 8px 12px rgba(0, 0, 0, 0.1);
+  width: 900px;
+  max-width: 95vw;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-container h2 {
+  font-family: "Merienda", cursive;
+  margin-bottom: 0.5rem;
+}
+
+.summery-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.summery-item:last-child {
+  border-bottom: none;
+}
+
+.summery-item h5 {
+  font-size: 1.2rem;
+  margin: 0 0 5px 0;
+}
+
+.summery-item p {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.summery-btn {
+  background: var(--dark);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.summery-btn:hover {
+  background: var(--gold);
+}
+
+.summery-btn.danger {
+  background: #fff;
+  border: 1px solid #d93636;
+  color: #d93636;
+}
+
+.summery-btn.danger:hover {
+  background: #d93636;
+  color: #fff;
+}
+
+/* Custom form inputs */
+.form-input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
 }

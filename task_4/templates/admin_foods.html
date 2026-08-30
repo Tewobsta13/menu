@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Menu Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}" />
+  </head>
+  <body>
+    <header class="admin-header">
+      <h1>Menu Management</h1>
+      <a href="/admin/orders" class="add-order-btn" style="margin-right:10px;"> Back to Orders </a>
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </header>
+
+    <main class="admin-container">
+      <h2>Add New Menu Item</h2>
+      <form id="add-food-form" style="display:flex; flex-direction:column; gap:1rem;">
+        <div style="display:flex; gap:1rem;">
+          <input type="text" class="form-input" id="food-name" placeholder="Name" required style="flex:1;">
+          <input type="text" class="form-input" id="food-category" placeholder="Category" required style="flex:1;">
+        </div>
+        <div style="display:flex; gap:1rem;">
+          <input type="text" class="form-input" id="food-type" placeholder="Type" style="flex:1;">
+          <input type="number" class="form-input" step="0.01" id="food-price" placeholder="Price (ETB)" required style="flex:1;">
+        </div>
+        <input type="text" class="form-input" id="food-image" placeholder="Image URL">
+        <textarea id="food-description" class="form-input" placeholder="Description" style="resize:vertical;"></textarea>
+        <button type="submit" class="summery-btn" style="width: 150px; align-self: flex-end;">Add Item</button>
+      </form>
+    </main>
+
+    <main class="admin-container">
+      <h2>Current Menu Items</h2>
+      <div id="checkout-list">
+      {% for item in items %}
+        <div class="summery-item">
+          <div>
+            <h5>{{ item.name }}</h5>
+            <small style="color: #666;">{{ item.category }} | {{ item.type }}</small>
+            <p style="text-align: left; font-size: 0.9rem; margin-top: 5px; font-weight: normal; color: #444;">{{ item.description }}</p>
+          </div>
+          <p>{{ item.price }} ETB</p>
+          <button class="summery-btn danger delete-food-btn" data-id="{{ item.id }}">Delete</button>
+        </div>
+      {% else %}
+        <p>No menu items found.</p>
+      {% endfor %}
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+    <script>
+        document.getElementById("add-food-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById("food-name").value,
+                category: document.getElementById("food-category").value,
+                type: document.getElementById("food-type").value,
+                price: parseFloat(document.getElementById("food-price").value),
+                image: document.getElementById("food-image").value,
+                description: document.getElementById("food-description").value
+            };
+            
+            const tokenMatch = document.cookie.match(new RegExp('(^| )admin_token=([^;]+)'));
+            const token = tokenMatch ? tokenMatch[2] : '';
+
+            try {
+                const res = await fetch("/api/admin/foods", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) {
+                    alert("Menu item added!");
+                    window.location.reload();
+                } else {
+                    alert("Error adding item");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Error adding item");
+            }
+        });
+
+        document.querySelectorAll(".delete-food-btn").forEach(btn => {
+            btn.addEventListener("click", async (e) => {
+                if (!confirm("Are you sure you want to delete this menu item?")) return;
+                
+                const id = e.target.getAttribute("data-id");
+                const tokenMatch = document.cookie.match(new RegExp('(^| )admin_token=([^;]+)'));
+                const token = tokenMatch ? tokenMatch[2] : '';
+
+                try {
+                    const res = await fetch(`/api/admin/foods/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    if (res.ok) {
+                        alert("Menu item deleted!");
+                        window.location.reload();
+                    } else {
+                        alert("Error deleting item");
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Error deleting item");
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
